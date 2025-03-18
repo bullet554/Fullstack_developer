@@ -1,0 +1,19 @@
+.item {
+    width: 150px;
+    height: 86px;
+    background-color: forestgreen;
+    border: 1px solid #000;
+    transition: transform 1s;
+}
+
+.item_1:hover {
+    transform: translateX(50px);
+}
+
+.item_2:hover {
+    transform: scale(2);
+}
+
+.item_3:hover {
+    transform: rotate(60deg);
+}

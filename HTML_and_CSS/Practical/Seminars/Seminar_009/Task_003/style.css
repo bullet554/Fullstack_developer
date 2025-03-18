@@ -1,0 +1,7 @@
+.img:hover path {
+    fill: purple;
+}
+
+.img:active path {
+    fill: yellow;
+}
