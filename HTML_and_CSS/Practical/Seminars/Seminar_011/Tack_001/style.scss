@@ -6,12 +6,10 @@
     padding: 0;
 }
 
-%font-normal {
-    font-family: sans-serif;
-    font-weight: normal;
+.container {
+    width: $widthSite;
 }
 
-// Выделение текста
 .color-text {
     color: $colorText;
 }
@@ -22,19 +20,16 @@
 
     &__link {
         text-decoration: none;
-        @extend %font-normal;
     }
 }
 
 .content {
-    width: $widthSite;
     display: flex;
     gap: $gapSite;
-    @include center();
 
     &__item {
         width: $widthSite / 4;
-        border: $frame;
         height: 200px;
+        border: $borderSite;
     }
 }
