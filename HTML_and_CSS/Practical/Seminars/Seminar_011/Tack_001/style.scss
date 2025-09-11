@@ -1,9 +1,14 @@
-@import 'vars';
-@import 'mixins';
+@use 'vars';
+@use 'mixins';
 
 * {
     margin: 0;
     padding: 0;
+}
+
+%font-normal {
+    font-family: sans-serif;
+    font-weight: normal;
 }
 
 .container {
@@ -20,12 +25,14 @@
 
     &__link {
         text-decoration: none;
+        @extend %font-normal;
     }
 }
 
 .content {
     display: flex;
     gap: $gapSite;
+    @include center;
 
     &__item {
         width: $widthSite / 4;
