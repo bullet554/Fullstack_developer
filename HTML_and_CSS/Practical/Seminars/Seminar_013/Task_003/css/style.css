@@ -1,0 +1,65 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.nav {
+  background-color: #504f4f;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 150px;
+}
+
+#menu-toggle {
+  display: none;
+  /* Скрытие чекбокса */
+}
+
+/* Стили для иконки меню */
+.menu-icon {
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+  /* Ваши текущие стили для расположения иконки */
+}
+
+/* Стили для меню */
+.menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  /* Меню выезжает справа */
+  top: 50px;
+  width: 250px;
+  /* Ширина меню */
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 20px;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Анимация при открытии */
+#menu-toggle:checked ~ .menu {
+  display: block;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Дополнительные стили для пунктов меню */
+.menu li {
+  margin: 10px 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.menu a:hover {
+  color: #007bff;
+}/*# sourceMappingURL=style.css.map */
