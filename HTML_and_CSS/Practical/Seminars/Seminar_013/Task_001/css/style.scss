@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.details {
+
+    &__title {
+        list-style: none;
+        color: rgb(108, 10, 165);
+    }
+
+    &__arrow-right::before {
+        content: '\2192';
+        font-size: 1em;
+        padding: 0 0.5em;
+        transition: transform 0.3s;
+        vertical-align: middle;
+    }
+}
+
+.details[open] summary::before {
+    transform: rotate(90deg);
+    content: '\2193';
+    vertical-align: middle;
+}
