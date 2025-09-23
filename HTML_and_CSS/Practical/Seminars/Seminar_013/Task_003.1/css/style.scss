@@ -83,7 +83,6 @@ a {
     padding: 32px;
     box-sizing: border-box;
     background: #FFF;
-    z-index: 6;
 
     &__heading {
         color: #000;
@@ -119,9 +118,9 @@ a {
         font-weight: 400;
         line-height: normal;
 
-        &:hover {
-            color: $colorSelectSite;
-        }
+        // &:hover {
+        //     color: $colorSelectSite;
+        // }
     }
 }
 
