@@ -26,6 +26,14 @@ body {
   font-family: Lato;
 }
 
+summary {
+  display: block;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
 a {
   text-decoration: none;
 }
@@ -77,6 +85,7 @@ a {
   padding: 32px;
   box-sizing: border-box;
   background: #FFF;
+  box-shadow: 6px 4px 35px 0 rgba(0, 0, 0, 0.21);
   z-index: 6;
   transition: 0.3s;
 }
@@ -113,6 +122,151 @@ a {
 }
 .menu__link:hover {
   color: #F16D7F;
+}
+
+.breadcrumb {
+  background-color: #F8F3F4;
+  height: 148px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+.breadcrumb__left {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.breadcrumb__right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+.breadcrumb__link {
+  color: #636363;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.breadcrumb__link-3 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.breadcrumb__pink-text {
+  color: #F16D7F;
+}
+
+.filter-sort {
+  position: absolute;
+  padding-top: 51px;
+  padding-bottom: 65px;
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 6;
+}
+
+.filter {
+  margin-top: -13px;
+  padding: 13px 16px 16px;
+  position: relative;
+  width: 360px;
+  box-sizing: border-box;
+}
+.filter[open] {
+  background: #FFF;
+  box-shadow: 6px 4px 35px 0 rgba(0, 0, 0, 0.21);
+}
+.filter[open] .filter__heading {
+  color: #F16D7F;
+}
+.filter[open] path {
+  fill: #F16D7F;
+}
+.filter__summary {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.filter__heading {
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.filter__item {
+  margin-top: 16px;
+}
+.filter__item__heading {
+  color: #6F6E6E;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 8px 11px 11px 11px;
+  border-bottom: 1px solid #EBEBEB;
+  border-left: 5px solid #F16D7F;
+}
+.filter__item[open] .filter__item__heading {
+  color: #F16D7F;
+}
+.filter__link-box {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 24px 16px;
+}
+.filter__link {
+  color: #6F6E6E;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.filter__link:hover {
+  color: #F16D7F;
+}
+
+.sort {
+  padding-left: 30px;
+  display: flex;
+  gap: 28px;
+}
+.sort__dtls {
+  position: relative;
+}
+.sort__dtls__title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  list-style: none;
+  color: #6F6E6E;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.sort__dtls__box {
+  position: absolute;
+  left: -9px;
+  top: 22px;
+  background: #FFF;
+  box-shadow: 6px 4px 35px 0 rgba(0, 0, 0, 0.21);
+  padding: 7px 9px 11px;
+  block-size: border-box;
+  width: 79px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 6;
 }
 
 .hero {
@@ -231,6 +385,7 @@ a {
 
 .product {
   background-color: #fff;
+  margin-top: 132px;
 }
 .product__title {
   display: flex;
@@ -485,46 +640,6 @@ a {
   line-height: normal;
 }
 
-.breadcrumb {
-  background-color: #F8F3F4;
-  height: 148px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  align-items: center;
-  justify-content: space-around;
-}
-.breadcrumb__left {
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-.breadcrumb__right {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-}
-.breadcrumb__link {
-  color: #636363;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-.breadcrumb__link-3 {
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-.breadcrumb__pink-text {
-  color: #F16D7F;
-}
-
 @media (max-width: 1024px) {
   .center {
     padding-left: calc(50% - 376px);
@@ -552,6 +667,10 @@ a {
     padding-top: 19px;
     padding-bottom: 154px;
     gap: 20px;
+  }
+  .sort {
+    padding-top: 24px;
+    padding-bottom: 49px;
   }
   .product__title {
     margin-bottom: 3px;
@@ -627,6 +746,10 @@ a {
   .breadcrumb__right {
     margin-top: 32px;
     padding-bottom: 46px;
+  }
+  .sort {
+    padding-top: 26px;
+    padding-bottom: 41px;
   }
   .product__subtitle {
     margin-bottom: 64px;
