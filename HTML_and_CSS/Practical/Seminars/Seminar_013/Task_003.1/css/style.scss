@@ -83,6 +83,8 @@ a {
     padding: 32px;
     box-sizing: border-box;
     background: #FFF;
+    z-index: 6;
+    transition: 0.3s;
 
     &__heading {
         color: #000;
@@ -118,9 +120,9 @@ a {
         font-weight: 400;
         line-height: normal;
 
-        // &:hover {
-        //     color: $colorSelectSite;
-        // }
+        &:hover {
+            color: $colorSelectSite;
+        }
     }
 }
 
@@ -255,6 +257,7 @@ a {
 }
 
 .product {
+    background-color: #fff;
 
     &__title {
         display: flex;
@@ -355,7 +358,7 @@ a {
         color: #5D5D5D;
         font-size: 14px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 300;
         line-height: normal;
     }
 
@@ -509,7 +512,7 @@ a {
     }
 
     &__btn {
-        padding: 7px;
+        padding: 7px 7px 6px 8px;
         background-color: $colorSelectSite;
         color: #fff;
         font-size: 14px;
@@ -541,6 +544,53 @@ a {
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+    }
+}
+
+// Catalog
+
+.breadcrumb {
+    background-color: #F8F3F4;
+    height: 148px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+
+    &__left {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+
+    &__link {
+        color: #636363;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &__link-3 {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    &__pink-text {
+        color: $colorSelectSite;
     }
 }
 
@@ -672,6 +722,18 @@ a {
         // &__item-1 {
         //     min-height: 247px;
         // }
+    }
+
+    .breadcrumb {
+
+        &__left {
+            padding-top: 24px;
+        }
+
+        &__right {
+            margin-top: 32px;
+            padding-bottom: 46px;
+        }
     }
 
     .product {

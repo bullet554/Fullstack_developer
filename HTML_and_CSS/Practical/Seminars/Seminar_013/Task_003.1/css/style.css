@@ -78,6 +78,7 @@ a {
   box-sizing: border-box;
   background: #FFF;
   z-index: 6;
+  transition: 0.3s;
 }
 .menu__heading {
   color: #000;
@@ -228,6 +229,9 @@ a {
   background-image: url(../img/offer-accesories.jpg);
 }
 
+.product {
+  background-color: #fff;
+}
 .product__title {
   display: flex;
   justify-content: center;
@@ -316,7 +320,7 @@ a {
   color: #5D5D5D;
   font-size: 14px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
 }
 .product__price {
@@ -449,7 +453,7 @@ a {
   line-height: normal;
 }
 .subscribe__btn {
-  padding: 7px;
+  padding: 7px 7px 6px 8px;
   background-color: #F16D7F;
   color: #fff;
   font-size: 14px;
@@ -479,6 +483,46 @@ a {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.breadcrumb {
+  background-color: #F8F3F4;
+  height: 148px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+.breadcrumb__left {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.breadcrumb__right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+.breadcrumb__link {
+  color: #636363;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.breadcrumb__link-3 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.breadcrumb__pink-text {
+  color: #F16D7F;
 }
 
 @media (max-width: 1024px) {
@@ -576,6 +620,13 @@ a {
     display: flex;
     flex-direction: column;
     gap: 32px;
+  }
+  .breadcrumb__left {
+    padding-top: 24px;
+  }
+  .breadcrumb__right {
+    margin-top: 32px;
+    padding-bottom: 46px;
   }
   .product__subtitle {
     margin-bottom: 64px;
