@@ -308,13 +308,13 @@ a {
   left: 0;
   background-color: #f16d7f;
 }
-.hero__big-text {
+.hero__big_text {
   font-size: 48px;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
 }
-.hero__pink-text {
+.hero__pink_text {
   color: #F16D7F;
   font-size: 32px;
   font-style: normal;
