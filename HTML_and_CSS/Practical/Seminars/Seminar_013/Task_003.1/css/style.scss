@@ -135,7 +135,7 @@ a {
     }
 }
 
-.breadcrumb {
+.breadcrumbs {
     background-color: #F8F3F4;
     height: 148px;
     display: flex;
@@ -151,13 +151,13 @@ a {
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        color: $colorSelectSite;
     }
 
     &__right {
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 15px;
     }
 
     &__link {
@@ -166,17 +166,17 @@ a {
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-    }
 
-    &__link-3 {
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-    }
+        &:not(:last-child)::after {
+            content: '/';
+            padding-left: 8px;
+            padding-right: 8px;
+        }
 
-    &__pink-text {
-        color: $colorSelectSite;
+        &:last-child {
+            font-weight: 700;
+            color: $colorSelectSite;
+        }
     }
 }
 
