@@ -691,7 +691,7 @@ a {
     &__img {
         max-width: 360px;
         max-height: 420px;
-        position: relative;
+        // position: relative;
         width: 100%;
         margin-bottom: 25px;
     }
@@ -704,7 +704,11 @@ a {
         content: "";
         position: absolute;
         z-index: 5;
-        inset: 0;
+        // inset: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         background-color: rgba(58, 56, 56, 0.86);
         opacity: 0;
         transition: opacity 0.2s ease-in-out;
@@ -737,6 +741,10 @@ a {
     &__item:hover .product__add {
         opacity: 1;
     }
+
+    &__item:hover .product__img {
+        margin-bottom: 0;
+    } // new
 
     &__name {
         color: #000;
