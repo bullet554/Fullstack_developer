@@ -606,7 +606,6 @@ a {
   max-width: 360px;
   max-height: 420px;
   width: 100%;
-  margin-bottom: 25px;
 }
 .product__image-wrapper {
   position: relative;
@@ -615,10 +614,7 @@ a {
   content: "";
   position: absolute;
   z-index: 5;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: rgba(58, 56, 56, 0.86);
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
@@ -648,8 +644,8 @@ a {
 .product__item:hover .product__add {
   opacity: 1;
 }
-.product__item:hover .product__img {
-  margin-bottom: 0;
+.product__content {
+  margin-top: 25px;
 }
 .product__name {
   color: #000;
