@@ -1,0 +1,76 @@
+$widthDuck: 75px;
+$countDuck: 6;
+
+@for $i from 1 through $countDuck {
+    @keyframes duck-fly-#{$i} {
+        0% {
+            top: random($limit: 90) + vh;
+        }
+
+        50% {
+            right: random($limit: 60) + vw;
+            top: random($limit: 90) + vh;
+        }
+
+        100% {
+            right: 100vw;
+            top: random($limit: 90) + vh;
+        }
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    counter-reset: count;
+    height: 100vh;
+    background-image: url(../img/background.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.duck {
+    position: absolute;
+    right: -$widthDuck;
+
+    &__img {
+        width: $widthDuck;
+    }
+
+    @for $i from 1 through $countDuck {
+        &_#{$i} {
+            animation: duck-fly-#{$i} 5s ease-in #{$i}s both;
+        }
+
+    }
+
+}
+
+.duck-check {
+    position: absolute;
+    visibility: hidden;
+    left: -99999px;
+
+    &:checked {
+        counter-increment: count;
+    }
+
+    &:checked~label {
+        display: none;
+    }
+}
+
+.counter-info {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+
+    &::before {
+        content: counter(count);
+    }
+}
