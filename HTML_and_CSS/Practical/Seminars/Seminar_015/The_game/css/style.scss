@@ -1,0 +1,89 @@
+$widthBulb: 25px;
+$countBulb: 3;
+
+
+@keyframes bulb-light {
+    0% {
+        fill-opacity: 0;
+    }
+
+    50% {
+        fill-opacity: 1;
+
+    }
+
+    100% {
+        fill-opacity: 0;
+    }
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    counter-reset: count;
+    background-image: url(../img/earth.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    position: relative;
+}
+
+.box {
+    position: absolute;
+    fill: transparent;
+
+    &__img {
+        width: $widthBulb;
+        fill: #e4bb05;
+    }
+
+
+    &_1 {
+        left: random(90) + vw;
+        top: random(90) + vh;
+        animation: bulb-light 3s linear 0s both;
+    }
+
+    &_2 {
+        left: random(90) + vw;
+        top: random(90) + vh;
+        animation: bulb-light 3s linear 1.5s both;
+    }
+
+    &_3 {
+        left: random(90) + vw;
+        top: random(90) + vh;
+        animation: bulb-light 3s linear 3s both;
+    }
+}
+
+.bulb {
+    position: absolute;
+    visibility: hidden;
+    left: -9999999px;
+
+    &:checked {
+        counter-increment: count;
+    }
+
+    &:checked~label {
+        display: none;
+    }
+}
+
+.counter-info {
+    position: absolute;
+    right: 48px;
+    top: 24px;
+    color: white;
+
+    &::before {
+        content: counter(count);
+    }
+}

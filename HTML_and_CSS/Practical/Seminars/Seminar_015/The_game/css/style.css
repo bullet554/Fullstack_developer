@@ -1,0 +1,72 @@
+@keyframes bulb-light {
+  0% {
+    fill-opacity: 0;
+  }
+  50% {
+    fill-opacity: 1;
+  }
+  100% {
+    fill-opacity: 0;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  counter-reset: count;
+  background-image: url(../img/earth.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
+}
+
+.box {
+  position: absolute;
+  fill: transparent;
+}
+.box__img {
+  width: 25px;
+  fill: #e4bb05;
+}
+.box_1 {
+  left: 43vw;
+  top: 81vh;
+  animation: bulb-light 3s linear 0s both;
+}
+.box_2 {
+  left: 31vw;
+  top: 77vh;
+  animation: bulb-light 3s linear 1.5s both;
+}
+.box_3 {
+  left: 20vw;
+  top: 30vh;
+  animation: bulb-light 3s linear 3s both;
+}
+
+.bulb {
+  position: absolute;
+  visibility: hidden;
+  left: -9999999px;
+}
+.bulb:checked {
+  counter-increment: count;
+}
+.bulb:checked ~ label {
+  display: none;
+}
+
+.counter-info {
+  position: absolute;
+  right: 48px;
+  top: 24px;
+  color: white;
+}
+.counter-info::before {
+  content: counter(count);
+}/*# sourceMappingURL=style.css.map */
