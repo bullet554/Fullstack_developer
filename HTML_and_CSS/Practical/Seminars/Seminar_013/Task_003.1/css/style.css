@@ -755,6 +755,9 @@ a {
 .regist-left__gender input[type=radio]:checked + span::after {
   background-color: #F16D7F;
 }
+.regist-left__gender_third-gender {
+  display: none;
+}
 .regist-left__pass-info {
   color: #B1B1B1;
   font-size: 13px;
@@ -804,9 +807,14 @@ a {
   font-weight: 400;
   line-height: normal;
   list-style-position: inside;
+  list-style-type: none;
 }
 .regist-right__list_item {
   padding-bottom: 16px;
+}
+.regist-right__list_item::before {
+  content: url(../img/marker.svg);
+  margin-right: 22px;
 }
 
 .feature {
@@ -1029,6 +1037,54 @@ a {
   .product__item {
     flex: 1 1 calc(50% - 20px);
   }
+  .regist {
+    padding-top: 40px;
+  }
+  .regist-left__gender {
+    color: #222;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+  }
+  .regist-left__gender label {
+    margin-left: 10px;
+  }
+  .regist-left__gender input[type=radio] {
+    display: none;
+  }
+  .regist-left__gender input[type=radio] + span {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid #A4A4A4;
+  }
+  .regist-left__gender input[type=radio]:checked + span::after {
+    background-color: #F16D7F;
+  }
+  .regist-right {
+    width: 354px;
+  }
+  .regist-right__title {
+    font-size: 16px;
+  }
+  .regist-right__info {
+    padding-top: 32px;
+    font-size: 16px;
+  }
+  .regist-right__list {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  .regist-right__list_item {
+    display: flex;
+    align-items: center;
+    padding-bottom: 16px;
+  }
   .feature {
     margin-top: 63px;
     height: 610px;
@@ -1199,15 +1255,20 @@ a {
   .product__item {
     max-width: 360px;
   }
-  .feature {
-    margin-top: 96px;
+  .regist {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
   }
-  .feature__info {
-    font-weight: 300;
+  .regist-left__button_style {
+    margin-bottom: 40px;
+  }
+  .regist-right__list {
+    padding-bottom: 100px;
   }
   .subscribe {
-    background-size: 100% 693px;
-    height: 693px;
+    background-size: 100% 550px;
+    height: 550px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
