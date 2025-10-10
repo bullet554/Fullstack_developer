@@ -807,6 +807,141 @@ a {
     }
 }
 
+.product-page {
+
+    &__show {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__view {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__arrow {
+        width: 47px;
+        height: 47px;
+        background-color: rgba(42, 42, 42, 0.15);
+        border: none;
+
+        &_icon {
+            padding: 8px;
+        }
+
+        &:hover {
+            path {
+                fill: $colorSelectSite;
+            }
+        }
+    }
+
+    &__slide {
+        margin-top: 11px;
+        margin-bottom: 42px;
+    }
+
+    &__content {
+        padding-top: 65px;
+        padding-bottom: 65px;
+        display: flex;
+        flex-direction: column;
+        // flex-wrap: wrap;
+        // align-content: center;
+        align-items: center;
+    }
+
+    &__info {
+        &_subtitle {
+            color: $colorSelectSite;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            text-align: center;
+        }
+
+        &_line {
+            margin: 12px auto;
+            width: 63px;
+            height: 3px;
+            background-color: $colorSelectSite;
+        }
+
+        &_title {
+            margin-bottom: 48px;
+            color: #4D4D4D;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            text-align: center;
+        }
+
+        &_text {
+            width: 565px;
+            margin-bottom: 32px;
+            color: #5E5E5E;
+            text-align: center;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+
+        &_price {
+            color: $colorSelectSite;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            text-align: center;
+        }
+    }
+
+    &__line {
+        margin: 65px auto;
+        width: 641px;
+        height: 1px;
+        background-color: #EAEAEA;
+    }
+
+    &__choose {
+        padding: 0 0 48px 0;
+        gap: 23px;
+    }
+
+    &__add-btn {
+        width: 212px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        padding-left: 24px;
+        cursor: pointer;
+
+        &_cart {
+            path {
+                fill: $colorSelectSite;
+                transition: 0.3s;
+            }
+        }
+
+        &:hover {
+            path {
+                fill: #FFF;
+            }
+        }
+    }
+
+    &__offers {
+        padding-top: 129px;
+        padding-bottom: 129px;
+        margin: 0;
+    }
+}
+
 .regist {
     padding-top: 64px;
     display: flex;
@@ -1212,6 +1347,27 @@ a {
         }
     }
 
+    .product-page {
+        &__slide {
+            margin-top: 29px;
+            margin-bottom: 29px;
+        }
+
+        &__choose {
+            padding-left: 0;
+        }
+
+        &__offers {
+            display: flex;
+            // gap: revert-layer;
+            margin-bottom: 0;
+        }
+
+        &__third-item {
+            display: none;
+        }
+    }
+
     .regist {
         padding-top: 40px;
 
@@ -1497,6 +1653,67 @@ a {
 
         &__item {
             max-width: 360px;
+        }
+    }
+
+    .product-page {
+        &__show {
+            position: relative;
+            flex-wrap: wrap;
+            align-content: center;
+        }
+
+        &__view {
+            height: 454px;
+
+        }
+
+        &__arrow {
+
+            &_left {
+                position: absolute;
+                left: 0;
+
+            }
+
+            &_right {
+                position: absolute;
+                right: 0;
+            }
+        }
+
+        &__info {
+            &_title {
+                margin-bottom: 32px;
+            }
+
+            &_text {
+                width: 336px;
+                line-height: 143.1%;
+            }
+
+            &_price {
+                line-height: 130%;
+            }
+        }
+
+        &__line {
+            margin: 32px auto 49px;
+            width: 175px;
+        }
+
+        &__choose {
+            padding-left: 0;
+        }
+
+        &__offers {
+            padding-top: 64px;
+            padding-bottom: 64px;
+            margin-bottom: 0;
+        }
+
+        &__third-item {
+            display: block;
         }
     }
 
