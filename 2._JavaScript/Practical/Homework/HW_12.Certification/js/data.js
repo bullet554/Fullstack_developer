@@ -60,22 +60,6 @@ const dataCartJSON = `
             "price": "52",
             "color": "Black",
             "size": "Xl"
-        },
-        {
-            "id": 3,
-            "img": "../img/cart/product-1.jpg",
-            "name": "MANGO  T-SHIRT",
-            "price": "3000",
-            "color": "Blue",
-            "size": "Xl"
-        },
-        {
-            "id": 4,
-            "img": "../img/cart/product-2.jpg",
-            "name": "ELLERY CAPSULE",
-            "price": "52000",
-            "color": "Brown",
-            "size": "L"
         }
     ]
 `;

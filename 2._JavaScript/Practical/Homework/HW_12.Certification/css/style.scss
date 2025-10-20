@@ -1348,6 +1348,10 @@ a {
 
         &__item {
             flex: 1 1 calc(50% - 20px);
+
+            &_mobile {
+                display: none;
+            }
         }
     }
 
@@ -1715,11 +1719,7 @@ a {
             padding-top: 64px;
             padding-bottom: 64px;
             margin-bottom: 0;
-        }
-
-        &__third-item {
-            display: block;
-        }
+        }       
     }
 
     .regist {

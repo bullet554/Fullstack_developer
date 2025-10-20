@@ -1147,6 +1147,9 @@ a {
   .product__item {
     flex: 1 1 calc(50% - 20px);
   }
+  .product__item_mobile {
+    display: none;
+  }
   .product-page__slide {
     margin-top: 29px;
     margin-bottom: 29px;
@@ -1419,9 +1422,6 @@ a {
     padding-top: 64px;
     padding-bottom: 64px;
     margin-bottom: 0;
-  }
-  .product-page__third-item {
-    display: block;
   }
   .regist {
     display: flex;

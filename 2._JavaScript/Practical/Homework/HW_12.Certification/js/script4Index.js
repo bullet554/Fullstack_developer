@@ -43,3 +43,36 @@ productsDataIndex.forEach(productData => {
     productContent.appendChild(productPrice);
 
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Получаем все кнопки "Add to Cart"
+    const addToCartButtons = document.querySelectorAll('.product__add');
+
+    // Обработчик клика
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            // Находим карточку товара, к которой относится кнопка
+            const productCard = e.target.closest('.product__item');
+
+            // Собираем данные товара
+            const productData = {
+                id: Date.now() + Math.random().toString(36).substr(2, 9), // Уникальный ID
+                name: productCard.querySelector('.product__name').textContent,
+                price: productCard.querySelector('.product__price').textContent,
+                img: productCard.querySelector('.product__img').src
+            };
+
+            // Получаем текущую корзину из localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Добавляем товар
+            cart.push(productData);
+
+            // Сохраняем в localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Переходим на страницу корзины
+            window.location.href = 'cart.html';
+        });
+    });
+});
