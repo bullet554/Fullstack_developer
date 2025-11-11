@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #333;
+        }
+
+        .menu li {
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: #555;
+        }
+
+        .menu a:active {
+            background-color: #f00;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="menu" id="menu">
+        <li><a href="#" class="menu__link">Главная</a></li>
+        <li><a href="#" class="menu__link">О нас</a></li>
+        <li><a href="#" class="menu__link">Услуги</a></li>
+        <li><a href="#" class="menu__link">Контакты</a></li>
+    </ul>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
