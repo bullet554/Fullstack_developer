@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+button {
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.photo {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.photo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.photo-info {
+  margin-top: 10px;
+}/*# sourceMappingURL=style.css.map */
