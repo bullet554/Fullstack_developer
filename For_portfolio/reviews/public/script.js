@@ -1,14 +1,10 @@
-// Получаем контейнер для размещения карточек
-const container = document.querySelector('#container');
-
 let productsData = [];
 
 async function loadData() {
     try {
-        // Загружаем данные из JSON
         const response = await fetch('data.json');
         productsData = await response.json();
-        
+
         renderProducts(productsData);
     } catch (error) {
         console.error('Ошибка при загрузке данных:', error);
@@ -17,11 +13,9 @@ async function loadData() {
 }
 
 function renderProducts(products) {
-    // Очистка контейнера
     container.innerHTML = '';
 
     products.forEach((element, index) => {
-        // Создание карточки продукта
         const productCard = document.createElement('div');
         productCard.classList.add('product');
 
@@ -62,10 +56,8 @@ function renderProducts(products) {
                 text: reviewText
             };
 
-            // Добавляем новый отзыв
             productsData[productIndex].reviews.push(newReview);
 
-            // Сохраняем новый отзыв в DOM
             const newReviewElement = document.createElement('div');
             newReviewElement.classList.add('review-item');
             newReviewElement.innerHTML = `<p>${reviewText}</p>`;
@@ -80,26 +72,29 @@ function renderProducts(products) {
                     throw new Error('Пожалуйста, введите текст отзыва');
                 }
 
-                // Передаем индекс продукта
                 addReview(newReviewText, index);
                 textarea.value = '';
 
-                // Пытаемся сохранить изменения в data.json
                 try {
-                    const response = await fetch('data.json', {
+                    const response = await fetch('/data.json', {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(productsData)
                     });
-                    
+
                     if (!response.ok) {
-                        throw new Error('Ошибка при сохранении данных');
+                        throw new Error(`Ошибка: ${response.statusText}`);
                     }
+
+                    console.log('Ответ сервера:', response);
+
+                    const data = await response.json();
+                    console.log(data.message);
                 } catch (error) {
                     console.error('Ошибка при сохранении данных:', error);
-                    alert('Не удалось сохранить отзыв. Попробуйте позже.');
+                    alert('Произошла ошибка при сохранении данных.');
                 }
             } catch (error) {
                 alert(error.message);
@@ -110,7 +105,6 @@ function renderProducts(products) {
     });
 }
 
-// Запускаем загрузку данных при загрузке страницы
 window.addEventListener('DOMContentLoaded', () => {
     loadData();
 });
