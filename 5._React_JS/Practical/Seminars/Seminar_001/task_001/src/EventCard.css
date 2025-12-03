@@ -1,0 +1,13 @@
+.event-card {
+    font-size: 32px;
+    background-color: #3d4657;
+}
+
+.event-card__title {
+    color: #61dafb;
+}
+
+.event-card__date,
+.event-card__location {
+    color: #36d2c0;
+}
