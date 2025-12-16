@@ -1,0 +1,23 @@
+.app {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page {
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.nav-link:hover {
+    background-color: #0056b3;
+}
