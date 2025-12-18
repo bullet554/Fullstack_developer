@@ -1,0 +1,80 @@
+.app {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.light-theme {
+    background-color: #fff;
+    color: #333;
+}
+
+.dark-theme {
+    background-color: #333;
+    color: #fff;
+}
+
+header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+}
+
+header input {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.profile {
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.theme-switch {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.theme-switch:hover {
+    background-color: #0056b3;
+}
+
+.counter {
+    padding: 20px;
+    font-family: Arial;
+}
+
+.counter__btn-up {
+    margin: 5px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.counter__btn-down {
+    margin: 5px;
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
