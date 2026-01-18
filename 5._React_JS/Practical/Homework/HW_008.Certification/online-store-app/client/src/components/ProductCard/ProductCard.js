@@ -1,22 +1,28 @@
 import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
-import styles from './ProductCard.module.scss';
+import { Link } from 'react-router-dom';
+import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
     const { addToCart } = useContext(CartContext);
 
     return (
-        <div className={styles.productCard}>
-            <img src={product.image} alt={product.name} className={styles.productImage} />
-            <div className={styles.productInfo}>
-                <h3 className={styles.productName}>{product.name}</h3>
-                <p className={styles.productPrice}>${product.price}</p>
+        <div className="product__item">
+            <div className="product__image-wrapper">
+                <img
+                    src={product.img}
+                    alt={product.name}
+                    className="product__img"
+                />
                 <button
-                    className={styles.addToCart}
+                    class="product__add"
                     onClick={() => addToCart(product)}
-                >
-                    Add to Cart
-                </button>
+                >Add to Cart</button>
+            </div>
+            <div className="product__content">
+                <Link to="#" class="product__name">{product.name}</Link>
+                <p className="product__info">{product.info}</p>
+                <Link to="#" className="product__price">${product.price}</Link>
             </div>
         </div>
     );
