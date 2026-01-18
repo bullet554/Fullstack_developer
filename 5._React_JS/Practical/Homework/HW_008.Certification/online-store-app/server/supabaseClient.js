@@ -1,4 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
+import { config } from 'dotenv';
+
+config({
+    path: '.env', // Явно указываем путь
+    debug: process.env.DEBUG // Для отладки (опционально)
+});
 
 let supabase;
 

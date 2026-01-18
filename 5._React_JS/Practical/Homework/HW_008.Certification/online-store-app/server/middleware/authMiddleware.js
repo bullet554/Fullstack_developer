@@ -1,4 +1,10 @@
 import jwt from 'jsonwebtoken';
+import { config } from 'dotenv';
+
+config({
+    path: '.env', // Явно указываем путь
+    debug: process.env.DEBUG // Для отладки (опционально)
+});
 
 export default (req, res, next) => {
     const authHeader = req.headers['authorization'];

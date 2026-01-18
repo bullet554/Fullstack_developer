@@ -3,6 +3,10 @@ import { config } from 'dotenv';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import authRoutes from './routes/auth.js';
+import productRoutes from './routes/products.js';
+import cartRoutes from './routes/cart.js';
+import userRouter from './routes/users.js';
 
 // Настройка путей для ES‑модулей
 const __filename = fileURLToPath(import.meta.url);
@@ -13,15 +17,6 @@ config({
     debug: process.env.DEBUG // Для отладки (опционально)
 });
 
-console.log('SUPABASE_URL:', process.env.SUPABASE_URL);
-console.log('SUPABASE_KEY:', process.env.SUPABASE_KEY);
-
-console.log('=== ENVIRONMENT VARIABLES ===');
-console.log('SUPABASE_URL:', process.env.SUPABASE_URL);
-console.log('SUPABASE_KEY:', process.env.SUPABASE_KEY);
-console.log('DOTENV LOADED:', !!process.env.SUPABASE_URL);
-console.log('============================');
-
 const app = express();
 
 app.use(express.static(join(__dirname, 'public')));
@@ -29,13 +24,15 @@ app.use(express.static(join(__dirname, 'public')));
 app.use(cors());
 app.use(express.json());
 
-import authRoutes from './routes/auth.js';
-import productRoutes from './routes/products.js';
-import cartRoutes from './routes/cart.js';
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/users', userRouter);
+
+app.use((req, res, next) => {
+    res.status(404).json({ message: 'Ресурс не найден' });
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
