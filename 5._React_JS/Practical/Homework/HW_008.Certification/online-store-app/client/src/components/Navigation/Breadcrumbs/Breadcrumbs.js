@@ -1,15 +1,18 @@
-import styles from './Breadcrumbs.module.scss';
+import { Link } from 'react-router-dom';
+import './Breadcrumbs.css';
 
 const Breadcrumbs = ({ items }) => {
     return (
-        <nav className={styles.breadcrumbs}>
-            {items.map((item, index) => (
-                <span key={index} className={styles.breadcrumb}>
-                    {item.name}
-                    {index < items.length - 1 && ' / '}
-                </span>
-            ))}
-        </nav>
+        <section className="breadcrumbs center">
+            <div className="breadcrumbs__left">
+                <h1 className="breadcrumbs__left_title">NEW ARRIVALS</h1>
+            </div>
+            <ul className="breadcrumbs__right">
+                <Link to="/" class="breadcrumbs__link">HOME</Link>
+                <Link to="#" class="breadcrumbs__link">MEN</Link>
+                <Link to="#" class="breadcrumbs__link">NEW ARRIVALS</Link>
+            </ul>
+        </section>
     );
 };
 

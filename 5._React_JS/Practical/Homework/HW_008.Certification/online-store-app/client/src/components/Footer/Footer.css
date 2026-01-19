@@ -3,7 +3,7 @@
   height: 79px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 .footer__text {
