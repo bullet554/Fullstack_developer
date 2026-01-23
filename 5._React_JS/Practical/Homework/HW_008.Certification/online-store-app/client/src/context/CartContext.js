@@ -1,45 +1,29 @@
-import { createContext, useReducer } from "react";
+import { createContext, useState } from 'react';
 
 export const CartContext = createContext();
 
-const initialState = {
-    cart: [],
-    total: 0
-};
-
-const cartReducer = (state, action) => {
-    switch (action.type) {
-        case 'ADD_TO_CART':
-            return {
-                ...state,
-                cart: [...state.cart, action.payload],
-                total: state.total + action.payload.price
-            };
-        case 'REMOVE_FROM_CART':
-            return {
-                ...state,
-                cart: state.cart.filter(item => item.id !== action.payload),
-                total: state.total - action.payload.price
-            };
-        default:
-            return state;
-    }
-};
-
 export const CartProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(cartReducer, initialState);
+  const [cart, setCart] = useState([]);
 
-    const addToCart = (product) => {
-        dispatch({ type: 'ADD_TO_CART', payload: product });
-    };
+  const addToCart = (product) => {
+    setCart(prevCart => [...prevCart, product]);
+  };
 
-    const removeFromCart = (productId) => {
-        dispatch({ type: 'REMOVE_FROM_CART', payload: productId });
-    };
+  const removeFromCart = (productId) => {
+    setCart(prevCart => prevCart.filter(item => item.id !== productId));
+  };
 
-    return (
-        <CartContext.Provider value={{ ...state, addToCart, removeFromCart }}>
-            {children}
-        </CartContext.Provider>
+  const updateQuantity = (productId, quantity) => {
+    setCart(prevCart => 
+      prevCart.map(item => 
+        item.id === productId ? { ...item, quantity } : item
+      )
     );
+  };
+
+  return (
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
+      {children}
+    </CartContext.Provider>
+  );
 };

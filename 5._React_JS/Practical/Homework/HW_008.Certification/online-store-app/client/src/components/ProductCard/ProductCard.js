@@ -1,10 +1,20 @@
 import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
     const { addToCart } = useContext(CartContext);
+    const { user } = useAuth();
+
+    const handleAddToCart = async () => {
+        if (!user) {
+            alert('Please log in or register first');
+            return;
+        }
+        await addToCart(product);
+    };
 
     return (
         <div className="product__item">
@@ -16,11 +26,18 @@ const ProductCard = ({ product }) => {
                 />
                 <button
                     className="product__add"
-                    onClick={() => addToCart(product)}
-                >Add to Cart</button>
+                    onClick={handleAddToCart}
+                >
+                    Add to Cart
+                </button>
             </div>
             <div className="product__content">
-                <Link to={`/product/${product.id}`} className="product__name">{product.name}</Link>
+                <Link
+                    to={`/product/${product.id}`}
+                    className="product__name"
+                >
+                    {product.name}
+                </Link>
                 <p className="product__info">{product.info}</p>
                 <Link to="#" className="product__price">${product.price}</Link>
             </div>

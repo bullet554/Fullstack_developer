@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import Product from './pages/Product';
@@ -6,10 +6,11 @@ import Registration from './pages/Registration';
 import Cart from './pages/Cart';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -19,7 +20,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
-    </>
+    </AuthProvider>
   );
 }
 

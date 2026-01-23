@@ -1,43 +1,124 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 import Subscribe from "../components/Subscribe/Subscribe";
+import CartCard from "../components/CartCard/CartCard";
+import '../styles/pagesStyles/Cart.css';
 
 const Cart = () => {
-    const { cart } = useContext(CartContext);
+    const { cart, addToCart, removeFromCart, updateQuantity } = useContext(CartContext);
+    const { user, login } = useAuth();
+    const navigate = useNavigate();
 
     const total = cart.reduce((acc, item) => {
-        return acc + item.quantity * item.product.price;
+        if (item && item.product && item.product.price) {
+            return acc + item.quantity * item.product.price;
+        }
+        return acc;
     }, 0);
 
+    const handleQuantityChange = (productId, newQuantity) => {
+        updateQuantity(productId, newQuantity);
+    };
+
+    const handleRemove = (productId) => {
+        removeFromCart(productId);
+    };
+
+    const handleClearCart = () => {
+        // Логика очистки корзины
+    };
+
+    const handleCheckout = () => {
+        if (!user) {
+            alert('Please log in or register first');
+            navigate('/login');
+            return;
+        }
+        // Логика перехода к оформлению заказа
+    };
+
     return (
-        <div>
-            <div className={styles.cart}>
-                <h2 className={styles.cartTitle}>Корзина</h2>
-                {cart.map(item => (
-                    <div key={item.product.id} className={styles.cartItem}>
-                        <ProductCard product={item.product} />
-                        <div className={styles.quantityControl}>
-                            <input
-                                type="number"
-                                value={item.quantity}
-                                className={styles.quantityInput}
-                                onChange={(e) => updateQuantity(item.product.id, parseInt(e.target.value))}
+        <>
+            <section className="breadcrumbs center">
+
+                <div className="breadcrumbs__left">
+                    <h1 className="breadcrumbs__left_title">SHOPPING CART</h1>
+                </div>
+
+                <ul className="breadcrumbs__right"></ul>
+            </section>
+
+            <section className="center">
+                <div className="cart-page">
+
+                    <div className="cart-product__added">
+
+                        {cart.map((item) => (
+                            <CartCard
+                                key={item.product.id}
+                                product={item.product}
+                                quantity={item.quantity}
+                                onQuantityChange={handleQuantityChange}
+                                onRemove={handleRemove}
                             />
-                            <button
-                                className={styles.removeButton}
-                                onClick={() => removeFromCart(item.product.id)}
-                            >
-                                Удалить
-                            </button>
+                        ))}
+
+                        <div className="cart-product__buttons">
+
+                            <div className="cart-product__button_left">
+                                <form className="cart-product__button_name" action="#">
+                                    <button
+                                        className="cart-product__button_style"
+                                        onClick={handleClearCart}
+                                    >
+                                        CLEAR SHOPPING CART
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div className="cart-product__button_right">
+                                <form className="cart-product__button_name" action="/catalog">
+                                    <button className="cart-product__button_style">
+                                        CONTINUE SHOPPING
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                ))}
-                <div className={styles.total}>
-                    <p>Итого: ${total.toFixed(2)}</p>
+
+                    <div className="cart-adress">
+
+                        <div className="cart__fields">
+                            <h2 className="cart-adress__title">SHIPPING ADRESS</h2>
+                            <input className="cart-adress__input" type="text" placeholder="Bangladesh" />
+                            <input className="cart-adress__input" type="text" placeholder="State" />
+                            <input className="cart-adress__input" type="text" placeholder="Postcode / Zip" />
+                            <form className="cart-adress__button_name" action="#">
+                                <button className="cart-adress__button_style">GET A QUOTE</button>
+                            </form>
+                        </div>
+
+                        <div className="cart-buy">
+                            <p className="cart-buy__subtitle">SUB TOTAL ${total}</p>
+                            <h2 className="cart-buy__title">GRAND TOTAL <span className="cart-buy_select-color">${total}</span></h2>
+                            <div className="cart-buy__line"></div>
+                            <form className="cart-buy__button_name" action="#">
+                                <button
+                                    className="cart-buy__button_style"
+                                    onClick={handleCheckout}
+                                >
+                                    PROCEED&nbsp;TO&nbsp;CHECKOUT
+                                </button> {/* Думаю пока что не реализовывать логику сохранения в БД закза */}
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
+
             <Subscribe />
-        </div>
+        </>
     );
 }
 

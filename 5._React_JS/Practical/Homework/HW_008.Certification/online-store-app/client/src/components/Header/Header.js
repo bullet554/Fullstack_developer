@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import "./Header.css";
 import headerLogo from "../../assets/img/logos/header_logo.svg";
 import headerSearch from "../../assets/img/ui/header_search.svg";
@@ -8,22 +9,57 @@ import headerRight2 from "../../assets/img/ui/header_right_2.svg";
 import headerRight3 from "../../assets/img/ui/header_right_3.svg";
 
 const Header = () => {
+    const { user, login, logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isAuthOpen, setIsAuthOpen] = useState(false);
+    const [authError, setAuthError] = useState('');
+
     const menuRef = useRef(null);
+    const authRef = useRef(null);
     const buttonRef = useRef(null);
+    const authButtonRef = useRef(null);
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const toggleMenu = () => {
         setIsMenuOpen(prev => !prev);
     };
 
+    const toggleAuth = () => {
+        setIsAuthOpen(prev => !prev);
+    };
+
     const handleOutsideClick = (e) => {
         if (
-            menuRef.current &&
-            !menuRef.current.contains(e.target) &&
-            buttonRef.current &&
-            !buttonRef.current.contains(e.target)
+            (!menuRef.current || !menuRef.current.contains(e.target)) &&
+            (!authRef.current || !authRef.current.contains(e.target)) &&
+            (!buttonRef.current || !buttonRef.current.contains(e.target)) &&
+            (!authButtonRef.current || !authButtonRef.current.contains(e.target)) &&
+            !e.target.closest('.auth-menu')
         ) {
             setIsMenuOpen(false);
+            setIsAuthOpen(false);
+        }
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setAuthError('');
+
+        if (!email || !password) {
+            return setAuthError('Пожалуйста, заполните все поля');
+        }
+
+        try {
+            await login({ email, password });
+            if (!user) {
+                setAuthError('Неверный email или пароль');
+            } else {
+                setIsAuthOpen(false); // Закрываем форму после успешного входа
+            }
+        } catch (error) {
+            setAuthError('Ошибка при входе в систему');
         }
     };
 
@@ -116,9 +152,64 @@ const Header = () => {
                     </ul>
                 </div>
 
-                <Link to="/registration" className="header__nav header__nav_mobile">
-                    <img src={headerRight2} alt="regist" className="header__img" />
-                </Link>
+                {user ? (
+                    <div className="auth-menu auth-menu_logged">
+                        <div className="auth-menu__user">
+                            <p className="auth-menu__greeting">
+                                Welcome, {user.name || user.email}
+                            </p>
+                            <button
+                                className="auth-menu__button auth-menu__button_logout"
+                                onClick={logout}
+                            >
+                                Log out
+                            </button>
+                        </div>
+                    </div>
+                ) : (
+                    <div
+                        className={`auth-menu ${isAuthOpen ? 'active' : ''}`}
+                        ref={authRef}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <form className="auth-menu__form" onSubmit={handleLogin}>
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                className="auth-menu__input"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                className="auth-menu__input"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            {authError && <p className="auth-error">{authError}</p>}
+                            <button className="auth-menu__button" type="submit">
+                                Sign in
+                            </button>
+                            <p className="auth-menu__link">
+                                <Link to="/registration">Create account</Link>
+                            </p>
+                        </form>
+                    </div>
+                )}
+
+                <img
+                    src={headerRight2}
+                    alt="auth"
+                    className="header__img"
+                    onClick={() => {
+                        if (!user) {
+                            toggleAuth();
+                        }
+                    }}
+                    ref={authButtonRef}
+                    style={{ cursor: "pointer" }}
+                />
 
                 <Link to="/cart" className="header__nav header__nav_mobile">
                     <img src={headerRight3} alt="cart" className="header__img" />

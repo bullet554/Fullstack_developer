@@ -8,7 +8,7 @@ const SALT_ROUNDS = 10;
 
 router.post('/register', async (req, res) => {
     const supabase = initSupabase();
-    const { email, password, name } = req.body;
+    const { email, password, firstName, lastName, gender } = req.body;
 
     try {
         const { data: existingUser } = await supabase
@@ -25,12 +25,20 @@ router.post('/register', async (req, res) => {
 
         const { data: newUser } = await supabase
             .from('users')
-            .insert([{ email, password: hashedPassword, name }])
+            .insert([
+                {
+                    email,
+                    password: hashedPassword,
+                    first_name: firstName, // Используем корректное имя поля
+                    last_name: lastName,
+                    gender,
+                }
+            ])
             .select();
 
         res.status(201).json({
             message: 'Успешно зарегистрирован',
-            user: { id: newUser[0].id, email, name }
+            user: { id: newUser.id, email, firstName, lastName }
         });
     } catch (err) {
         res.status(500).json({ error: err.message });

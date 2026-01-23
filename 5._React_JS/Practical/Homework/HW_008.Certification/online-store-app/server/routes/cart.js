@@ -18,8 +18,8 @@ router.get('/', async (req, res) => {
                 id,
                 product_id,
                 quantity,
-                products (id, name, price, image, color, size) 
-      `)
+                products (id, name, price, image, color, size)
+                `)
             .eq('user_id', userId);
 
         if (error) {
