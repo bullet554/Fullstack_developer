@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/register', [
     body('email').isEmail().withMessage('Invalid email'),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+    body('password').isLength({ min: 8 }).withMessage('Password must be at least 6 characters'),
     async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -18,7 +18,7 @@ router.post('/register', [
 ], register);
 router.post('/login', [
     body('email').isEmail().withMessage('Invalid email'),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+    body('password').isLength({ min: 8 }).withMessage('Password must be at least 6 characters'),
     async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

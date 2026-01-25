@@ -27,7 +27,11 @@ const Header = () => {
     };
 
     const toggleAuth = () => {
-        setIsAuthOpen(prev => !prev);
+        if (user) {
+            setIsAuthOpen(true);
+        } else {
+            setIsAuthOpen(prev => !prev);
+        }
     };
 
     const handleOutsideClick = (e) => {
@@ -61,6 +65,7 @@ const Header = () => {
         } catch (error) {
             setAuthError('Ошибка при входе в систему');
         }
+        console.log('Текущий пользователь:', {user});
     };
 
     useEffect(() => {
@@ -71,7 +76,7 @@ const Header = () => {
     }, []);
 
     return (
-        <header className={`header center ${isMenuOpen ? 'menu-open' : ''}`}>
+        <header className={`header center ${isMenuOpen || isAuthOpen ? 'menu-open' : ''}`}>
             <section className="header__left">
                 <Link to="/" className="header__logo">
                     <img src={headerLogo} alt="logo" />
@@ -152,14 +157,28 @@ const Header = () => {
                     </ul>
                 </div>
 
+                <img
+                    src={headerRight2}
+                    alt="auth"
+                    className="header__img"
+                    onClick={toggleAuth}
+                    ref={authButtonRef}
+                    style={{ cursor: "pointer" }}
+                />
+
                 {user ? (
-                    <div className="auth-menu auth-menu_logged">
-                        <div className="auth-menu__user">
-                            <p className="auth-menu__greeting">
-                                Welcome, {user.name || user.email}
+                    <div
+                        className={`auth-menu_logged ${isAuthOpen ? 'active' : ''}`}
+                        ref={authRef}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="auth-menu_logged__user">
+                            <p className="auth-menu_logged__greeting">
+                                Welcome, {user.firstName} {user.lastName}
                             </p>
+                            <p className="auth-menu_logged__greeting">{user.email}</p>
                             <button
-                                className="auth-menu__button auth-menu__button_logout"
+                                className="auth-menu_logged__button auth-menu_logged__button_logout"
                                 onClick={logout}
                             >
                                 Log out
@@ -197,19 +216,6 @@ const Header = () => {
                         </form>
                     </div>
                 )}
-
-                <img
-                    src={headerRight2}
-                    alt="auth"
-                    className="header__img"
-                    onClick={() => {
-                        if (!user) {
-                            toggleAuth();
-                        }
-                    }}
-                    ref={authButtonRef}
-                    style={{ cursor: "pointer" }}
-                />
 
                 <Link to="/cart" className="header__nav header__nav_mobile">
                     <img src={headerRight3} alt="cart" className="header__img" />
