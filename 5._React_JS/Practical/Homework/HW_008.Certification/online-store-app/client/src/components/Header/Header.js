@@ -174,9 +174,9 @@ const Header = () => {
                     >
                         <div className="auth-menu_logged__user">
                             <p className="auth-menu_logged__greeting">
-                                Welcome, {user.firstName} {user.lastName}
+                                Welcome, {user.firstName} {user.lastName} {/* Данные пользователя не приходят */}
                             </p>
-                            <p className="auth-menu_logged__greeting">{user.email}</p>
+                            <p className="auth-menu_logged__greeting">{user.email}</p> {/* А эти данные пользователя приходят */}
                             <button
                                 className="auth-menu_logged__button auth-menu_logged__button_logout"
                                 onClick={logout}

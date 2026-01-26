@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
             alert('Please log in or register first');
             return;
         }
-        await addToCart(product);
+        await addToCart(product, 1, product.color, product.size);
     };
 
     return (

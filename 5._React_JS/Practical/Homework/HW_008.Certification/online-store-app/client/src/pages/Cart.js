@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import Subscribe from "../components/Subscribe/Subscribe";
@@ -7,33 +6,35 @@ import CartCard from "../components/CartCard/CartCard";
 import '../styles/pagesStyles/Cart.css';
 
 const Cart = () => {
-    const { cart, addToCart, removeFromCart, updateQuantity } = useContext(CartContext);
-    const { user, login } = useAuth();
-    const navigate = useNavigate();
+    const { cart, removeFromCart, updateQuantity } = useContext(CartContext);
+    const { user } = useAuth();
+
+    if (!Array.isArray(cart)) {
+        return <div>Загрузка корзины...</div>;
+    }
 
     const total = cart.reduce((acc, item) => {
-        if (item && item.product && item.product.price) {
-            return acc + item.quantity * item.product.price;
+        if (item && item.price) {
+            return acc + item.quantity * item.price;
         }
         return acc;
     }, 0);
 
-    const handleQuantityChange = (productId, newQuantity) => {
-        updateQuantity(productId, newQuantity);
+    const handleQuantityChange = (cartItemId, newQuantity) => {
+        updateQuantity(cartItemId, newQuantity);
     };
 
-    const handleRemove = (productId) => {
-        removeFromCart(productId);
+    const handleRemove = (cartItemId) => {
+        removeFromCart(cartItemId);
     };
 
     const handleClearCart = () => {
-        // Логика очистки корзины
+        // Можно реализовать массовое удаление, если потребуется
     };
 
     const handleCheckout = () => {
         if (!user) {
             alert('Please log in or register first');
-            navigate('/login');
             return;
         }
         // Логика перехода к оформлению заказа
@@ -55,15 +56,20 @@ const Cart = () => {
 
                     <div className="cart-product__added">
 
-                        {cart.map((item) => (
-                            <CartCard
-                                key={item.product.id}
-                                product={item.product}
-                                quantity={item.quantity}
-                                onQuantityChange={handleQuantityChange}
-                                onRemove={handleRemove}
-                            />
-                        ))}
+                        {cart.length === 0 ? (
+                            <div>Корзина пуста</div>
+                        ) : (
+                            <div>
+                                {cart.map((item) => (
+                                    <CartCard
+                                        key={item.id}
+                                        cartItem={item}
+                                        onQuantityChange={handleQuantityChange}
+                                        onRemove={handleRemove}
+                                    />
+                                ))}
+                            </div>
+                        )}
 
                         <div className="cart-product__buttons">
 

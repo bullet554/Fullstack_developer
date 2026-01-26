@@ -2,44 +2,44 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './CartCard.css';
 
-const CartCard = ({ product, quantity, onQuantityChange, onRemove }) => {
+const CartCard = ({ cartItem, onQuantityChange, onRemove }) => {
     const handleQuantityChange = (e) => {
         const newQuantity = parseInt(e.target.value, 10);
         if (isNaN(newQuantity) || newQuantity <= 0) return;
-        onQuantityChange(product.id, newQuantity);
+        onQuantityChange(cartItem.id, newQuantity);
     };
 
     return (
 
         <div className="cart-product-card">
             <img
-                src={product.img}
-                alt={product.name}
+                src={cartItem.img}
+                alt={cartItem.name}
                 className="cart-product-card__img"
             />
             <div className="cart-product-card__info">
                 <Link
-                    to={`/product/${product.id}`}
+                    to={`/product/${cartItem.id}`}
                     className="cart-product-card__name"
                 >
-                    {product.name}
+                    {cartItem.name}
                 </Link>
                 <p className="cart-product-card__text">
                     Price:
                     <span className="cart-product-card__text_select-color">
-                        ${product.price}
+                        ${cartItem.price}
                     </span>
                 </p>
                 <p className="cart-product-card__text">
                     Color:
                     <span className="cart-product-card__text_select-text">
-                        {product.color}
+                        {cartItem.color}
                     </span>
                 </p>
                 <p className="cart-product-card__text">
                     Size:
                     <span className="cart-product-card__text_select-text">
-                        {product.size}
+                        {cartItem.size}
                     </span>
                 </p>
                 <p className="cart-product-card__text">
@@ -47,7 +47,7 @@ const CartCard = ({ product, quantity, onQuantityChange, onRemove }) => {
                     <input
                         className="cart-product-card__text_count"
                         type="number"
-                        value={quantity}
+                        value={cartItem.quantity}
                         onChange={handleQuantityChange}
                         min="1"
                     />
@@ -55,7 +55,7 @@ const CartCard = ({ product, quantity, onQuantityChange, onRemove }) => {
             </div>
             <button
                 className="cart-product-card__close"
-                onClick={() => onRemove(product.id)}
+                onClick={() => onRemove(cartItem.id)}
             >
                 <svg className="cart-product__close_mobile" width="18"
                     height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,15 +69,16 @@ const CartCard = ({ product, quantity, onQuantityChange, onRemove }) => {
 };
 
 CartCard.propTypes = {
-    product: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        img: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        color: PropTypes.string.isRequired,
-        size: PropTypes.string.isRequired,
+    cartItem: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        productId: PropTypes.string.isRequired,
+        image: PropTypes.string,
+        name: PropTypes.string,
+        price: PropTypes.number,
+        color: PropTypes.string,
+        size: PropTypes.string,
+        quantity: PropTypes.number,
     }).isRequired,
-    quantity: PropTypes.number.isRequired,
     onQuantityChange: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
 };

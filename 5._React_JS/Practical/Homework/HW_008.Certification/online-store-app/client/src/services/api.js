@@ -12,13 +12,9 @@ export const productApi = {
 };
 
 export const cartApi = {
-    getCart: () => axios.get(`${API_BASE_URL}/cart`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    }),
-    addToCart: (item) => axios.post(`${API_BASE_URL}/cart`, item, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    }),
-    removeFromCart: (itemId) => axios.delete(`${API_BASE_URL}/cart/${itemId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    })
+    getCart: (userId) => axios.get(`${API_BASE_URL}/cart`, { params: { userId } }),
+    addToCart: (item) => axios.post(`${API_BASE_URL}/cart/add`, item),
+    removeFromCart: (cartItemId) => axios.delete(`${API_BASE_URL}/cart/remove/${cartItemId}`),
+    updateCartItem: (cartItemId, quantity) =>
+        axios.put(`${API_BASE_URL}/cart/update/${cartItemId}`, { quantity }),
 };

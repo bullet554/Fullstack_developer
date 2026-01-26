@@ -1,29 +1,57 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useAuth } from './AuthContext';
+import { cartApi } from '../services/api';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const { user } = useAuth();
   const [cart, setCart] = useState([]);
 
-  const addToCart = (product) => {
-    setCart(prevCart => [...prevCart, product]);
+  useEffect(() => {
+    if (user) {
+      loadCart();
+    } else {
+      setCart([]);
+    }
+  }, [user]);
+
+  const loadCart = async () => {
+    try {
+      const res = await cartApi.getCart(user.id);
+      setCart(res.data.items || []);
+    } catch (e) {
+      setCart([]);
+    }
   };
 
-  const removeFromCart = (productId) => {
-    setCart(prevCart => prevCart.filter(item => item.id !== productId));
+  const addToCart = async (product, quantity = 1) => {
+    if (!user) return;
+    await cartApi.addToCart({
+      userId: user.id,
+      productId: product.id,
+      quantity,
+    });
+    await loadCart();
   };
 
-  const updateQuantity = (productId, quantity) => {
-    setCart(prevCart => 
-      prevCart.map(item => 
-        item.id === productId ? { ...item, quantity } : item
-      )
-    );
+  const removeFromCart = async (cartItemId) => {
+    if (!user) return;
+    await cartApi.removeFromCart(cartItemId);
+    await loadCart();
+  };
+
+  const updateQuantity = async (cartItemId, quantity) => {
+    if (!user) return;
+    await cartApi.updateCartItem(cartItemId, quantity);
+    await loadCart();
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, loadCart }}>
       {children}
     </CartContext.Provider>
   );
 };
+
+export const useCart = () => useContext(CartContext);

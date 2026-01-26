@@ -6,11 +6,10 @@ import Registration from './pages/Registration';
 import Cart from './pages/Cart';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
-    <AuthProvider>
+    <>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -20,7 +19,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
-    </AuthProvider>
+    </>
   );
 }
 

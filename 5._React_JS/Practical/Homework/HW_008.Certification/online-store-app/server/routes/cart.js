@@ -83,6 +83,27 @@ router.post('/add', async (req, res) => {
     }
 });
 
+router.put('/update/:id', async (req, res) => {
+    const supabase = initSupabase();
+    const cartItemId = req.params.id;
+    const { quantity } = req.body;
+
+    try {
+        const { error } = await supabase
+            .from('cart')
+            .update({ quantity })
+            .eq('id', cartItemId);
+
+        if (error) {
+            return res.status(500).json({ error: 'Ошибка обновления количества' });
+        }
+
+        res.json({ message: 'Количество обновлено' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 router.delete('/remove/:id', async (req, res) => {
     const supabase = initSupabase();
     const cartItemId = req.params.id;
