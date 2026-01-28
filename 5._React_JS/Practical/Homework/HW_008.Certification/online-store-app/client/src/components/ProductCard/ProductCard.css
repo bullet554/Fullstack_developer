@@ -30,7 +30,7 @@
   margin-bottom: 48px;
 }
 .product__item {
-  flex: 1 1 calc(33.333% - 20px);
+  flex: 0 1 calc(33.333% - 20px);
   background-color: #F8F8F8;
 }
 .product__img {

@@ -21,10 +21,11 @@
   padding: 0;
 }
 
-body {
+html, body {
   color: #222;
   font-family: Lato;
   overflow-x: hidden;
+  width: 100%;
 }
 
 summary {
@@ -124,7 +125,7 @@ a {
     margin-bottom: 53px;
   }
   .product__item {
-    flex: 1 1 calc(50% - 20px);
+    flex: 0 1 calc(50% - 20px);
   }
   .product-page__slide {
     margin-top: 29px;
@@ -282,6 +283,9 @@ a {
     padding-bottom: 41px;
     margin-left: auto;
     gap: 23px;
+  }
+  .sort__dtls__box_price {
+    left: -77px;
   }
   .sort__dtls__title {
     font-size: 12px;
