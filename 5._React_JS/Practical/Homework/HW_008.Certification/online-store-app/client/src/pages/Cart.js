@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import Subscribe from "../components/Subscribe/Subscribe";
@@ -8,6 +9,8 @@ import '../styles/pagesStyles/Cart.css';
 const Cart = () => {
     const { cart, removeFromCart, updateQuantity, clearCart } = useContext(CartContext);
     const { user } = useAuth();
+
+    const navigate = useNavigate();
 
     if (!Array.isArray(cart)) {
         return <div>Загрузка корзины...</div>;
@@ -87,8 +90,14 @@ const Cart = () => {
                             </div>
 
                             <div className="cart-product__button_right">
-                                <form className="cart-product__button_name" action="/catalog">
-                                    <button className="cart-product__button_style">
+                                <form
+                                    className="cart-product__button_name" action="#"
+                                    onSubmit={(e) => { e.preventDefault(); }}
+                                >
+                                    <button
+                                        className="cart-product__button_style"
+                                        onClick={() => navigate("/catalog")}
+                                    >
                                         CONTINUE SHOPPING
                                     </button>
                                 </form>

@@ -8,9 +8,9 @@ const Breadcrumbs = ({ items }) => {
                 <h1 className="breadcrumbs__left_title">NEW ARRIVALS</h1>
             </div>
             <ul className="breadcrumbs__right">
-                <Link to="/" class="breadcrumbs__link">HOME</Link>
-                <Link to="#" class="breadcrumbs__link">MEN</Link>
-                <Link to="#" class="breadcrumbs__link">NEW ARRIVALS</Link>
+                <Link to="/" className="breadcrumbs__link">HOME</Link>
+                <Link to="#" className="breadcrumbs__link">MEN</Link>
+                <Link to="#" className="breadcrumbs__link">NEW ARRIVALS</Link>
             </ul>
         </section>
     );
