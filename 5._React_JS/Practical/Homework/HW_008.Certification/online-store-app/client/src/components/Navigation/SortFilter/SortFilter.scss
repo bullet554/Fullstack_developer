@@ -123,6 +123,18 @@
             flex-direction: column;
             gap: 6px;
             z-index: 6;
+
+            & input {
+                margin-right: 6px;
+            }
+
+            &_trending-now {
+                width: 90px;
+            }
+
+            &_price {
+                width: 110px;
+            }
         }
     }
 }

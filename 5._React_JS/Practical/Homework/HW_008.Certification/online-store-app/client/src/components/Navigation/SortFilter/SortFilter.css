@@ -104,4 +104,13 @@
   flex-direction: column;
   gap: 6px;
   z-index: 6;
+}
+.sort__dtls__box input {
+  margin-right: 6px;
+}
+.sort__dtls__box_trending-now {
+  width: 90px;
+}
+.sort__dtls__box_price {
+  width: 110px;
 }/*# sourceMappingURL=SortFilter.css.map */

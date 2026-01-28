@@ -1,7 +1,20 @@
 import { Link } from 'react-router-dom';
 import './SortFilter.css';
 
-const SortFilter = () => {
+const SortFilter = ({
+    featuredOnly,
+    setFeaturedOnly,
+    selectedSizes,
+    setSelectedSizes,
+    priceSort,
+    setPriceSort,
+}) => {
+    const toggleSize = (size) => {
+        setSelectedSizes(prev =>
+            prev.includes(size) ? prev.filter(s => s !== size) : [...prev, size]
+        );
+    };
+
     return (
         <section className="filter-sort center">
 
@@ -81,11 +94,16 @@ const SortFilter = () => {
                             fill="#6F6E6E" />
                     </svg>
                     </summary>
-                    <div className="sort__dtls__box">
-                        <label><input type="checkbox" /> XS</label>
-                        <label><input type="checkbox" /> S</label>
-                        <label><input type="checkbox" /> M</label>
-                        <label><input type="checkbox" /> L</label>
+                    <div className="sort__dtls__box sort__dtls__box_trending-now">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={featuredOnly}
+                                onChange={(e) => setFeaturedOnly(e.target.checked)}
+                            />
+                            Featured
+                        </label>
+
                     </div>
                 </details>
 
@@ -97,11 +115,55 @@ const SortFilter = () => {
                             fill="#6F6E6E" />
                     </svg>
                     </summary>
-                    <div className="sort__dtls__box">
-                        <label><input type="checkbox" /> XS</label>
-                        <label><input type="checkbox" /> S</label>
-                        <label><input type="checkbox" /> M</label>
-                        <label><input type="checkbox" /> L</label>
+                    <div className="sort__dtls__box sort__dtls__box_size">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={selectedSizes.includes('XS')}
+                                onChange={() => toggleSize('XS')}
+                            />
+                            XS
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={selectedSizes.includes('S')}
+                                onChange={() => toggleSize('S')}
+                            />
+                            S
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={selectedSizes.includes('M')}
+                                onChange={() => toggleSize('M')}
+                            />
+                            M
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={selectedSizes.includes('L')}
+                                onChange={() => toggleSize('L')}
+                            />
+                            L
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={selectedSizes.includes('XL')}
+                                onChange={() => toggleSize('XL')}
+                            />
+                            XL
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={selectedSizes.includes('XXL')}
+                                onChange={() => toggleSize('XXL')}
+                            />
+                            XXL
+                        </label>
                     </div>
                 </details>
 
@@ -113,11 +175,37 @@ const SortFilter = () => {
                             fill="#6F6E6E" />
                     </svg>
                     </summary>
-                    <div className="sort__dtls__box">
-                        <label><input type="checkbox" /> XS</label>
-                        <label><input type="checkbox" /> S</label>
-                        <label><input type="checkbox" /> M</label>
-                        <label><input type="checkbox" /> L</label>
+                    <div className="sort__dtls__box sort__dtls__box_price">
+                        <label>
+                            <input
+                                type="radio"
+                                name="priceSort"
+                                checked={priceSort === 'asc'}
+                                onChange={() => setPriceSort('asc')}
+                            />
+                            Low → High
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="priceSort"
+                                checked={priceSort === 'desc'}
+                                onChange={() => setPriceSort('desc')}
+                            />
+                            High → Low
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="priceSort"
+                                checked={priceSort === 'none'}
+                                onChange={() => setPriceSort('none')}
+                            />
+                            None
+                        </label>
+
                     </div>
                 </details>
             </div>

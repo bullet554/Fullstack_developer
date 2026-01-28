@@ -13,6 +13,21 @@ const Catalog = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 9;
 
+    const [featuredOnly, setFeaturedOnly] = useState(false);
+    const [selectedSizes, setSelectedSizes] = useState([]); // массив строк: ["S","M"]
+    const [priceSort, setPriceSort] = useState('none'); // 'none' | 'asc' | 'desc'
+
+    const filteredProducts = products
+        .filter(p => (featuredOnly ? p.is_featured : true))
+        .filter(p => (selectedSizes.length ? selectedSizes.includes(p.size) : true));
+
+    const sortedProducts = [...filteredProducts].sort((a, b) => {
+        if (priceSort === 'asc') return a.price - b.price;
+        if (priceSort === 'desc') return b.price - a.price;
+        return 0;
+    });
+
+
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -28,11 +43,15 @@ const Catalog = () => {
             .catch(error => console.error('Error:', error));
     }, []);
 
-    const totalPages = Math.ceil(products.length / productsPerPage);
+    const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [featuredOnly, selectedSizes, priceSort]);
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -52,10 +71,17 @@ const Catalog = () => {
     return (
         <>
             <Breadcrumbs />
-            <SortFilter />
-            <section class="product center">
+            <SortFilter
+                featuredOnly={featuredOnly}
+                setFeaturedOnly={setFeaturedOnly}
+                selectedSizes={selectedSizes}
+                setSelectedSizes={setSelectedSizes}
+                priceSort={priceSort}
+                setPriceSort={setPriceSort}
+            />
+            <section className="product center">
 
-                <div class="product__items">
+                <div className="product__items">
 
                     {currentProducts.map((product, index) => (
                         <ProductCard key={index} product={product} />
