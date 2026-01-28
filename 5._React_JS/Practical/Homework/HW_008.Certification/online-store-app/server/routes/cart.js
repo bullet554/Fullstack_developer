@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
                 id,
                 product_id,
                 quantity,
-                products (id, name, price, image, color, size)
+                products (id, name, price, img, color, size)
                 `)
             .eq('user_id', userId);
 
@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
                 quantity: item.quantity,
                 price: item.products.price,
                 name: item.products.name,
-                image: item.products.image,
+                img: item.products.img,
                 color: item.products.color,
                 size: item.products.size
             })),
@@ -47,39 +47,38 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
+    console.log('ADD TO CART body:', req.body);
     const supabase = initSupabase();
-    const { userId, productId, quantity } = req.body;
+    const { userId, productId, quantity, color, size } = req.body;
 
     if (!userId || !productId || !quantity) {
-        return res.status(400).json({ error: 'Недостаточно данных' });
+        return res.status(400).json({ error: 'Недостаточно данных', got: req.body });
     }
 
     try {
-        const { data: product, error: productError } = await supabase
-            .from('products')
-            .select('price')
-            .eq('id', productId)
-            .single();
-
-        if (productError || !product) {
-            return res.status(404).json({ error: 'Товар не найден' });
-        }
-
-        const { error: insertError } = await supabase
+        const { data, error: insertError } = await supabase
             .from('cart')
-            .insert([
-                { user_id: userId, product_id: productId, quantity: quantity }
-            ])
-            .onConflict(['user_id', 'product_id'])
-            .merge();
+            .insert([{
+                user_id: userId,
+                product_id: productId,
+                quantity,
+                color,
+                size,
+            }])
+            .select();
 
         if (insertError) {
-            return res.status(500).json({ error: 'Ошибка добавления в корзину' });
+            console.error('SUPABASE insertError:', insertError);
+            return res.status(500).json({
+                error: insertError.message,
+                details: insertError, // временно, чтобы увидеть код/детали
+            });
         }
 
-        res.status(201).json({ message: 'Товар добавлен в корзину' });
+        return res.json({ message: 'Товар добавлен в корзину', data });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        console.error('SERVER exception:', error);
+    return res.status(500).json({ error: error.message || 'Internal error' });
     }
 });
 

@@ -59,7 +59,7 @@ const Cart = () => {
                         {cart.length === 0 ? (
                             <div>Корзина пуста</div>
                         ) : (
-                            <div>
+                            <>
                                 {cart.map((item) => (
                                     <CartCard
                                         key={item.id}
@@ -68,7 +68,7 @@ const Cart = () => {
                                         onRemove={handleRemove}
                                     />
                                 ))}
-                            </div>
+                            </>
                         )}
 
                         <div className="cart-product__buttons">

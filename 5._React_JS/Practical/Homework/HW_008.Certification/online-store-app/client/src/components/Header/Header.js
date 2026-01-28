@@ -51,21 +51,18 @@ const Header = () => {
         e.preventDefault();
         setAuthError('');
 
-        if (!email || !password) {
-            return setAuthError('Пожалуйста, заполните все поля');
-        }
+        if (!email || !password) return setAuthError('Пожалуйста, заполните все поля');
 
         try {
-            await login({ email, password });
-            if (!user) {
-                setAuthError('Неверный email или пароль');
-            } else {
-                setIsAuthOpen(false); // Закрываем форму после успешного входа
+            const loggedUser = await login({ email, password });
+            if (!loggedUser?.id) {
+                setAuthError('Не удалось получить пользователя');
+                return;
             }
+            setIsAuthOpen(false);
         } catch (error) {
-            setAuthError('Ошибка при входе в систему');
+            setAuthError('Неверный email или пароль');
         }
-        console.log('Текущий пользователь:', {user});
     };
 
     useEffect(() => {

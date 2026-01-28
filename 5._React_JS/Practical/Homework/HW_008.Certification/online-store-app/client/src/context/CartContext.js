@@ -25,13 +25,17 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const addToCart = async (product, quantity = 1) => {
+  const addToCart = async (product, quantity = 1, color = null, size = null) => {
     if (!user) return;
+
     await cartApi.addToCart({
       userId: user.id,
       productId: product.id,
       quantity,
+      color,
+      size,
     });
+
     await loadCart();
   };
 
