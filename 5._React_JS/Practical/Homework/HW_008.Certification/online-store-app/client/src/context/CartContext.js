@@ -45,6 +45,12 @@ export const CartProvider = ({ children }) => {
     await loadCart();
   };
 
+  const clearCart = async () => {
+    if (!user) return;
+    await cartApi.clearCart(user.id);
+    await loadCart();
+  };
+
   const updateQuantity = async (cartItemId, quantity) => {
     if (!user) return;
     await cartApi.updateCartItem(cartItemId, quantity);
@@ -52,7 +58,7 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, loadCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, loadCart }}>
       {children}
     </CartContext.Provider>
   );

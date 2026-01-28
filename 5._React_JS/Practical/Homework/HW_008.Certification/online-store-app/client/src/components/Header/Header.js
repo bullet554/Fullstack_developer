@@ -51,17 +51,17 @@ const Header = () => {
         e.preventDefault();
         setAuthError('');
 
-        if (!email || !password) return setAuthError('Пожалуйста, заполните все поля');
+        if (!email || !password) return setAuthError('Please fill in all fields');
 
         try {
             const loggedUser = await login({ email, password });
             if (!loggedUser?.id) {
-                setAuthError('Не удалось получить пользователя');
+                setAuthError("Couldn't get the user");
                 return;
             }
             setIsAuthOpen(false);
         } catch (error) {
-            setAuthError('Неверный email или пароль');
+            setAuthError('Invalid email or password');
         }
     };
 
@@ -171,9 +171,9 @@ const Header = () => {
                     >
                         <div className="auth-menu_logged__user">
                             <p className="auth-menu_logged__greeting">
-                                Welcome, {user.firstName} {user.lastName} {/* Данные пользователя не приходят */}
+                                Welcome, {user.firstName} {user.lastName}
                             </p>
-                            <p className="auth-menu_logged__greeting">{user.email}</p> {/* А эти данные пользователя приходят */}
+                            <p className="auth-menu_logged__greeting">{user.email}</p>
                             <button
                                 className="auth-menu_logged__button auth-menu_logged__button_logout"
                                 onClick={logout}

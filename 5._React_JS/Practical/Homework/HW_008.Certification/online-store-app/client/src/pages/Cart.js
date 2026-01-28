@@ -6,7 +6,7 @@ import CartCard from "../components/CartCard/CartCard";
 import '../styles/pagesStyles/Cart.css';
 
 const Cart = () => {
-    const { cart, removeFromCart, updateQuantity } = useContext(CartContext);
+    const { cart, removeFromCart, updateQuantity, clearCart } = useContext(CartContext);
     const { user } = useAuth();
 
     if (!Array.isArray(cart)) {
@@ -28,9 +28,11 @@ const Cart = () => {
         removeFromCart(cartItemId);
     };
 
-    const handleClearCart = () => {
-        // Можно реализовать массовое удаление, если потребуется
+    const handleClearCart = async (e) => {
+        e.preventDefault();
+        await clearCart();
     };
+
 
     const handleCheckout = () => {
         if (!user) {
@@ -57,7 +59,7 @@ const Cart = () => {
                     <div className="cart-product__added">
 
                         {cart.length === 0 ? (
-                            <div>Корзина пуста</div>
+                            <div>The shopping cart is empty</div>
                         ) : (
                             <>
                                 {cart.map((item) => (

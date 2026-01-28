@@ -78,7 +78,7 @@ router.post('/add', async (req, res) => {
         return res.json({ message: 'Товар добавлен в корзину', data });
     } catch (err) {
         console.error('SERVER exception:', error);
-    return res.status(500).json({ error: error.message || 'Internal error' });
+        return res.status(500).json({ error: error.message || 'Internal error' });
     }
 });
 
@@ -122,5 +122,30 @@ router.delete('/remove/:id', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
+router.delete('/clear', async (req, res) => {
+    const supabase = initSupabase();
+    const userId = req.query.userId;
+
+    if (!userId) {
+        return res.status(400).json({ error: 'Требуется userId' });
+    }
+
+    try {
+        const { error } = await supabase
+            .from('cart')
+            .delete()
+            .eq('user_id', userId);
+
+        if (error) {
+            return res.status(500).json({ error: 'Ошибка очистки корзины' });
+        }
+
+        return res.json({ message: 'Корзина очищена' });
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+});
+
 
 export default router;

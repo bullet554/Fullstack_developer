@@ -72,7 +72,6 @@ const Catalog = () => {
                             />
                         )}
 
-                        {/* Номера страниц */}
                         {Array.from({ length: totalPages }, (_, index) => index + 1).map(number => (
                             <button
                                 key={number}

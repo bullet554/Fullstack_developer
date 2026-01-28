@@ -17,4 +17,5 @@ export const cartApi = {
     removeFromCart: (cartItemId) => axios.delete(`${API_BASE_URL}/cart/remove/${cartItemId}`),
     updateCartItem: (cartItemId, quantity) =>
         axios.put(`${API_BASE_URL}/cart/update/${cartItemId}`, { quantity }),
+    clearCart: (userId) => axios.delete(`${API_BASE_URL}/cart/clear`, { params: { userId } }),
 };
